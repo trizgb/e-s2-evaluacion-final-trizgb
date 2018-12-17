@@ -28,6 +28,9 @@ body {
 
 .show-item{
   background-color: pink;
+  border: 3px solid pink;
+  margin-bottom: 5px;
+
 }
 
 .show-image{
@@ -41,7 +44,7 @@ body {
 
 .favorite-show {
     background-color: rgb(184, 27, 53);
-    border: 2px solid pink;
+    border: 3px solid pink;
     box-sizing: border-box;
 
   .show-title {
