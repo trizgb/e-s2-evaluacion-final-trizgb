@@ -15,7 +15,7 @@ function searchShow () {
     .then(response => response.json())
     .then(data => {
       const results = data;
-      console.log(results);
+      // console.log(results);
       let addContent = '';
 
       // Por cada show contenido en el resultado de la búsqueda, se debe pintar una tarjeta donde se muestra imagen de la serie y el título
@@ -59,13 +59,21 @@ function handleClick (e) {
     console.log(accArrFav);
 
   } else {
-    accArrFav.lastIndexOf(culpable.innerHTML);
-    accArrFav.splice(accArrFav.lastIndexOf(culpable.innerHTML));
+    remove(accArrFav, culpable.innerHTML);
     console.log(accArrFav);
-
   }
-
 }
+
+function remove (array, element) {
+  const index = array.indexOf(element);
+
+  if (index !== -1) {
+    array.splice(index, 1);
+  }
+}
+
+let accArrFav = [];
+
 
 function favoriteShow() {
   const items = document.querySelectorAll('.show-item');
@@ -76,7 +84,6 @@ function favoriteShow() {
 }
 
 // Todos los favoritos en un array si se desclickla se borra y si se agregan nuevos se suman
-let accArrFav = [];
 // accArrFav.push('pepito');
 // accArrFav.push('pocholito');
 // accArrFav.push('paquito');
