@@ -23,8 +23,8 @@ function searchShow () {
         const showTitle = results[i].show.name;
         let showImage = results[i].show.image;
 
-        console.log(showTitle);
-        console.log(showImage);
+        // console.log(showTitle);
+        // console.log(showImage);
 
         // Algunas series no tienen cartel, en este caso se debe mostrar una imagen de relleno
         if (showImage === null){
@@ -61,6 +61,13 @@ function favoriteShow() {
   }
 }
 
+// Todos los favoritos en un array si se desclickla se borra y si se agregan nuevos se suman
+// let accArrFav = [];
+
+
 // Almacenar la información de favoritos en localStorage
+// localStorage.setItem('accArrFav', JSON.stringify(accArrFav));
+// const savedAccArrFav = JSON.parse(localStorage.getItem('accArrFav'));
+// console.log(savedAccArrFav.length);
 
 button.addEventListener('click', searchShow);
