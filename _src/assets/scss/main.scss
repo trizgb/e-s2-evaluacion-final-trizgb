@@ -22,7 +22,28 @@ body {
 
 }
 .shows__list{
-  background-color: cyan;
+  padding-left: 0;
+  list-style: none;
+  // display: grid;
 }
 
-// url('../images/logo-adalab-80px.png') center center no-repeat
+.show-item{
+  background-color: pink;
+}
+
+.show-image{
+
+}
+
+.show-title{
+  color: rgb(184, 27, 53);
+}
+
+.favorite-show {
+  .show-item {
+    background-color: aqua;
+  }
+  .show-title {
+    color: black;
+  }
+}
