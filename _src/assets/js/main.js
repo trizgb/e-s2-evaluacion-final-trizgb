@@ -3,34 +3,36 @@
 const searchField = document.querySelector('.search-field');
 const button = document.querySelector('.btn');
 const showsList = document.querySelector('.shows__list');
+let x = getFavorite();
+// x array de las peliculas favoritas
 
 // Al hacer click sobre el btn, la app debe conectase al urlApi
 function searchShow () {
 
   // Para construir la URL se necesita recoger el texto escrito en el input
   let showSearchName = searchField.value;
-  // console.log(showName);
 
   fetch(`http://api.tvmaze.com/search/shows?q=${showSearchName}`)
     .then(response => response.json())
     .then(data => {
       const results = data;
-      // console.log(results);
       let addContent = '';
 
       // Por cada show contenido en el resultado de la búsqueda, se debe pintar una tarjeta donde se muestra imagen de la serie y el título
       for (let i = 0; i < results.length; i++) {
-        // const id = results[i].show.id;
-        // console.log(id);
+        const id = results[i].show.id;
         const showTitle = results[i].show.name;
         let showImage = results[i].show.image;
+        let fav = '';
 
-        // console.log(showTitle);
-        // console.log(showImage);
+        //si el array de favoritos tiene el id que estamos buscando fav le ponemos el valor de la clase que pone el background darkpink
+        if (x.includes(id)) {
+          fav = 'favorite-show';
+        }
 
         // Algunas series no tienen cartel, en este caso se debe mostrar una imagen de relleno
         if (showImage === null){
-          const contentDefault = `<li class="show-item"> <img class="show-image" src="https://via.placeholder.com/210x295/cccccc/666666/?text=TV" alt="${showTitle}"><h2 class="show-title">${showTitle}</h2></li>`;
+          const contentDefault = `<li class="show-item ${fav}" id="${id}"> <img class="show-image" src="https://via.placeholder.com/210x295/cccccc/666666/?text=TV" alt="${showTitle}"><h2 class="show-title">${showTitle}</h2></li>`;
 
           // Cuando hacemos una nueva búsqueda que no se añada a lo anterior, sino que lo sobreescriba
           addContent += contentDefault;
@@ -38,44 +40,47 @@ function searchShow () {
 
         } else {
           const mediumImage = results[i].show.image.medium;
-          const contentImage = `<li class="show-item"> <img class="show-image" src="${mediumImage}" alt="${showTitle}"><h2 class="show-title">${showTitle}</h2></li>`;
+          const contentImage = `<li class="show-item ${fav}" id="${id}"> <img class="show-image" src="${mediumImage}" alt="${showTitle}"><h2 class="show-title">${showTitle}</h2></li>`;
 
           // Cuando hacemos una nueva búsqueda que no se añada a lo anterior, sino que lo sobreescriba
           addContent += contentImage;
           showsList.innerHTML = addContent;
         }
       }
-      favoriteShow();
+      markFavorite();
     });
 }
 
 // Una vez aparecen los resultados de búsqueda, indicar cuáles son nuestros favoritos. Al hacer click sobre el resultado cambia de color de fondo y se pone un borde alrededor de la tarjeta
 function handleClick (e) {
-  const culpable = e.currentTarget;
-  culpable.classList.toggle('favorite-show');
+  const selectedShow = e.currentTarget;
+  selectedShow.classList.toggle('favorite-show');
 
-  if (culpable.classList.contains('favorite-show') === true) {
-    accArrFav.push(culpable.innerHTML);
-    console.log(accArrFav);
+  if (selectedShow.classList.contains('favorite-show') === true) {
+    x.push(selectedShow.getAttribute('id'));
 
   } else {
-    remove(accArrFav, culpable.innerHTML);
-    console.log(accArrFav);
+    remove(x, selectedShow.getAttribute('id'));
   }
+
+  // Función que guarda en el localStorage el array de favoritos
+  saveFavorite(x);
 }
 
+// Función que borra un elemento del array, el cual pasas por parámetro
 function remove (array, element) {
+
+  //Devuelve la posición en el array del objeto buscado
   const index = array.indexOf(element);
 
+  //Si un elemento no está dentro del array te devuelve un -1
   if (index !== -1) {
+    // El 1 borra un elemento nada más del índice
     array.splice(index, 1);
   }
 }
 
-let accArrFav = [];
-
-
-function favoriteShow() {
+function markFavorite() {
   const items = document.querySelectorAll('.show-item');
 
   for (let i = 0; i< items.length; i++) {
@@ -84,28 +89,23 @@ function favoriteShow() {
 }
 
 // Todos los favoritos en un array si se desclickla se borra y si se agregan nuevos se suman
-// accArrFav.push('pepito');
-// accArrFav.push('pocholito');
-// accArrFav.push('paquito');
-// accArrFav.push('pascasio');
-// console.log(accArrFav);
-
-// accArrFav.splice(0, 1); //elimina el primer elemento
-// console.log(accArrFav);
-// // accArrFav.splice(,[]);
-
-// //método para buscar
-
-// //indexOf(elemento [,pos])
-// //lastIndexOf(elemento [,pos])
-// accArrFav.indexOf('paquito');
-// console.log(accArrFav.indexOf('pocholito'));
-
 
 
 // Almacenar la información de favoritos en localStorage
-// localStorage.setItem('accArrFav', JSON.stringify(accArrFav));
-// const savedAccArrFav = JSON.parse(localStorage.getItem('accArrFav'));
-// console.log(savedAccArrFav.length);
+function saveFavorite (favorites){
+  localStorage.setItem('favShows', JSON.stringify(favorites));
+}
+
+
+// Recoge las peliculas favoritas del localStorage, si no hay nada guardado (null) devuelve un array vacío y si ya tenemos guardado algo devuelve las peliculas
+function getFavorite (){
+  const f = localStorage.getItem('favShows');
+
+  if (f === null) {
+    return [];
+  } else {
+    return f;
+  }
+}
 
 button.addEventListener('click', searchShow);
