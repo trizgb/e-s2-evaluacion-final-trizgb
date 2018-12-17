@@ -43,12 +43,23 @@ function searchShow () {
           showsList.innerHTML = addContent;
         }
       }
+      favoriteShow();
     });
 }
 
-// Una vez aparecen los resultados de busqueda, indicar cuales son nuestros favoritos. Al hacer click sobre el resultado cambia de color de fondo y se pone un borde alrededor de la tarjeta
+// Una vez aparecen los resultados de búsqueda, indicar cuáles son nuestros favoritos. Al hacer click sobre el resultado cambia de color de fondo y se pone un borde alrededor de la tarjeta
+function handleClick (e) {
+  const culpable = e.currentTarget;
+  culpable.classList.toggle('favorite-show');
+}
 
+function favoriteShow() {
+  const items = document.querySelectorAll('.show-item');
 
+  for (let i = 0; i< items.length; i++) {
+    items[i].addEventListener('click', handleClick);
+  }
+}
 
 // Almacenar la información de favoritos en localStorage
 

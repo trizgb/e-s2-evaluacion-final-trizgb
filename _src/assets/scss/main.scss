@@ -22,7 +22,6 @@ body {
 
 }
 .shows__list{
-  padding-left: 0;
   list-style: none;
   // display: grid;
 }
@@ -32,6 +31,7 @@ body {
 }
 
 .show-image{
+  box-sizing: border-box;
 
 }
 
@@ -40,10 +40,11 @@ body {
 }
 
 .favorite-show {
-  .show-item {
-    background-color: aqua;
-  }
+    background-color: rgb(184, 27, 53);
+    border: 2px solid pink;
+    box-sizing: border-box;
+
   .show-title {
-    color: black;
+    color: pink;
   }
 }
