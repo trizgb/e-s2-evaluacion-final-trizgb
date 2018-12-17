@@ -15,11 +15,13 @@ function searchShow () {
     .then(response => response.json())
     .then(data => {
       const results = data;
-      // console.log(results);
+      console.log(results);
       let addContent = '';
 
       // Por cada show contenido en el resultado de la búsqueda, se debe pintar una tarjeta donde se muestra imagen de la serie y el título
       for (let i = 0; i < results.length; i++) {
+        // const id = results[i].show.id;
+        // console.log(id);
         const showTitle = results[i].show.name;
         let showImage = results[i].show.image;
 
@@ -51,6 +53,18 @@ function searchShow () {
 function handleClick (e) {
   const culpable = e.currentTarget;
   culpable.classList.toggle('favorite-show');
+
+  if (culpable.classList.contains('favorite-show') === true) {
+    accArrFav.push(culpable.innerHTML);
+    console.log(accArrFav);
+
+  } else {
+    accArrFav.lastIndexOf(culpable.innerHTML);
+    accArrFav.splice(accArrFav.lastIndexOf(culpable.innerHTML));
+    console.log(accArrFav);
+
+  }
+
 }
 
 function favoriteShow() {
@@ -62,7 +76,24 @@ function favoriteShow() {
 }
 
 // Todos los favoritos en un array si se desclickla se borra y si se agregan nuevos se suman
-// let accArrFav = [];
+let accArrFav = [];
+// accArrFav.push('pepito');
+// accArrFav.push('pocholito');
+// accArrFav.push('paquito');
+// accArrFav.push('pascasio');
+// console.log(accArrFav);
+
+// accArrFav.splice(0, 1); //elimina el primer elemento
+// console.log(accArrFav);
+// // accArrFav.splice(,[]);
+
+// //método para buscar
+
+// //indexOf(elemento [,pos])
+// //lastIndexOf(elemento [,pos])
+// accArrFav.indexOf('paquito');
+// console.log(accArrFav.indexOf('pocholito'));
+
 
 
 // Almacenar la información de favoritos en localStorage
