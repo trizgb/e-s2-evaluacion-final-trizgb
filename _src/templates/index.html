@@ -2,14 +2,23 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Adalab Web Starter Kit</title>
+	<title>Buscador de series</title>
   <link rel="icon" href="favicon.png"/>
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-  <div class="page">
+  <!-- <div class="page">
     <partial src="_header.html" label="Header"></partial>
     <partial src="_main.html" label="Main"></partial>
+  </div> -->
+
+  <h1 class="search__title">Buscador de series</h1>
+  <div class="search__container">
+    <label for="search-field"></label>
+    <input id="search-field" class="search-field" type="text" name="search-field" placeholder="The Good Place">
+    <button class="btn" type="button">Search</button>
   </div>
+  <ul class="shows__list"></ul>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

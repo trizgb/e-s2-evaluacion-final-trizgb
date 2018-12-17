@@ -1,6 +1,28 @@
 @import 'core/settings';
 
 body {
-	background: url('../images/logo-adalab-80px.png') center center no-repeat $color-white;
+  margin: 0;
+	background: $color-white;
 	height: 100vh;
 }
+
+.search__title {
+  margin-left: 10px;
+
+}
+.search__container{
+  margin-left: 10px;
+}
+
+.search-field{
+
+}
+
+.btn {
+
+}
+.shows__list{
+  background-color: cyan;
+}
+
+// url('../images/logo-adalab-80px.png') center center no-repeat
