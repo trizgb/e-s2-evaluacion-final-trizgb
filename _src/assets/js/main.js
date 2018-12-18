@@ -3,8 +3,8 @@
 const searchField = document.querySelector('.search-field');
 const button = document.querySelector('.btn');
 const showsList = document.querySelector('.shows__list');
-let x = getFavorite();
-// x array de las peliculas favoritas
+let arrFav = getFavorite();
+// let arrFav es el array de las peliculas favoritas
 
 // Al hacer click sobre el btn, la app debe conectase al urlApi
 function searchShow () {
@@ -26,7 +26,7 @@ function searchShow () {
         let fav = '';
 
         //si el array de favoritos tiene el id que estamos buscando fav le ponemos el valor de la clase que pone el background darkpink
-        if (x.includes(id)) {
+        if (arrFav.includes(id)) {
           fav = 'favorite-show';
         }
 
@@ -57,14 +57,13 @@ function handleClick (e) {
   selectedShow.classList.toggle('favorite-show');
 
   if (selectedShow.classList.contains('favorite-show') === true) {
-    x.push(selectedShow.getAttribute('id'));
+    arrFav.push(selectedShow.getAttribute('id'));
 
   } else {
-    remove(x, selectedShow.getAttribute('id'));
+    remove(arrFav, selectedShow.getAttribute('id'));
   }
-
   // Función que guarda en el localStorage el array de favoritos
-  saveFavorite(x);
+  saveFavorite(arrFav);
 }
 
 // Función que borra un elemento del array, el cual pasas por parámetro
