@@ -3,7 +3,6 @@
 const searchField = document.querySelector('.search-field');
 const button = document.querySelector('.btn');
 const showsList = document.querySelector('.shows__list');
-let arrFav = getFavorite();
 
 function searchShow () {
 
@@ -54,37 +53,6 @@ function handleClick (e) {
     remove(arrFav, selectedShow.getAttribute('id'));
   }
   saveFavorite(arrFav);
-}
-
-function remove (array, element) {
-
-  const index = array.indexOf(element);
-
-  if (index !== -1) {
-    array.splice(index, 1);
-  }
-}
-
-function markFavorite() {
-  const items = document.querySelectorAll('.show-item');
-
-  for (let i = 0; i< items.length; i++) {
-    items[i].addEventListener('click', handleClick);
-  }
-}
-
-function saveFavorite (favorites){
-  localStorage.setItem('favShows', JSON.stringify(favorites));
-}
-
-function getFavorite (){
-  const f = JSON.parse(localStorage.getItem('favShows'));
-
-  if (f === null) {
-    return [];
-  } else {
-    return f;
-  }
 }
 
 button.addEventListener('click', searchShow);
