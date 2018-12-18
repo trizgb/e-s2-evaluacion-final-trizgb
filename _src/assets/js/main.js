@@ -26,7 +26,7 @@ function searchShow () {
         let fav = '';
 
         //si el array de favoritos tiene el id que estamos buscando fav le ponemos el valor de la clase que pone el background darkpink
-        if (arrFav.includes(id)) {
+        if (arrFav.includes(id.toString())) {
           fav = 'favorite-show';
         }
 
@@ -98,7 +98,7 @@ function saveFavorite (favorites){
 
 // Recoge las peliculas favoritas del localStorage, si no hay nada guardado (null) devuelve un array vacío y si ya tenemos guardado algo devuelve las peliculas
 function getFavorite (){
-  const f = localStorage.getItem('favShows');
+  const f = JSON.parse(localStorage.getItem('favShows'));
 
   if (f === null) {
     return [];
